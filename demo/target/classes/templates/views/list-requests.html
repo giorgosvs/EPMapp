@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title th:text="${'EPM - ' + pageTitle}"></title>
+</head>
+<body>
+	<div th:replace="fragments/bar :: navigation_user"></div>
+	<div class = "container my-2">
+		<br/>
+		<h3>Leave Requests</h3>
+		<p></p>
+        <hr/>
+        <table border="1" class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                    	<th>Request ID</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each='app : ${applications}'>
+                	<td th:text='${app.id}'></td>
+                	<td th:text='${app.applicationType}'></td>
+                	<td th:text='${app.applicationDescription}'></td>
+                	<td th:text='${app.dateFrom}'></td>
+                    <td th:text='${app.dateTo}'></td>
+                    <td>Under Process</td>
+<!--                    	<td><a th:href="@{/users/showUpdateForm/{id}(id=${user.id})}" class="btn btn-primary">Edit</a> -->
+<!--                    	<a th:href="@{/users/deleteUser/{id}(id=${user.id})}" class="btn btn-danger" >Delete</a></td> -->
+				</tr>
+            </tbody>
+        </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<title th:text="${'EPM - ' + pageTitle}"></title>
+</head>
+<body>
+	<div th:replace="fragments/bar :: navigation_user" ></div>
+	<form action="#" th:action="@{/home/process_request}" th:object="${application}" method="post">
+	<div class = "container my-2">
+		<br/>
+		<h2>Submit a request for leave</h2>
+		<p>Please fill in the fields in the form below:</p>
+	</div>
+	
+	<div class = "container">
+	<div class="form-group">
+    <label for="exampleFormControlSelect1">Leave type</label>
+    <select class="form-control" id="applicationType" th:field="*{applicationType}">
+      <option value="Medical Leave">Medical Leave</option>
+      <option value="Maternity Leave">Maternity Leave</option>
+      <option value="Family/Parental Leave">Family/Parental Leave</option>
+      <option value="Active Military Duty">Active Military Duty</option>
+      <option value="Jury Duty">Jury Duty </option>
+      <option value="Annual Leave">Annual Leave</option>
+      <option value="Special Leave">Special Leave</option>
+    </select>	
+  	</div>
+  	 <div class="form-group">
+    <label for="date">Start Date</label>
+    <input type="date" class="form-control" th:field="*{dateFrom}" id="dateFrom" placeholder="Date From">
+  	<span th:if="${#fields.hasErrors('dateFrom')}" th:errors="*{dateFrom}"></span>
+  	</div>
+  	 <div class="form-group">
+    <label for="date">End Date</label>
+    <input type="date" class="form-control" th:field="*{dateTo}" id="dateTo" placeholder="Date To">
+  	<span th:if="${#fields.hasErrors('dateTo')}" th:errors="*{dateTo}"></span>
+  	</div>
+  	<div class="form-group">
+    <label for="">Description (Optional)</label>
+    <textarea class="form-control" th:field="*{applicationDescription}" id="exampleFormControlTextarea1" rows="3"></textarea>
+	</div>
+	<br/>
+  	<button type="submit" class="btn btn-primary">Submit</button>
+  	</div>
+	</form>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
