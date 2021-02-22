@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<title th:text="${'EPM - ' + pageTitle}"></title>
+</head>
+<body>
+<div class="container">
+	<div class="hero-unit" th:if="${#authorization.expression('!isAuthenticated()')}">
+		<div th:if="${#authorization.expression('isAuthenticated()')}">
+			<div th:replace="/fragments/bar :: navigation"></div>
+		</div>
+		<br/>
+		<h1><strong>EPM - Employee Petition Manager System</strong></h1>
+		<p>Welcome to the Employee Petition Manager Application! Login to
+			your account or get started by signing up.</p>
+		<p>
+			<a href="/login" th:href="@{/login}" class="btn btn-large btn-success">Login</a>
+			<a href="/signup" th:href="@{/signup}"
+				class="btn btn-large btn-success">Sign up</a>
+		</p>
+	</div>
+	
+	<div th:if="${#authorization.expression('isAuthenticated()')}" class = "container - fluid">
+		<br/>
+		<h1><strong>EPM - Employee Petition Manager System</strong></h1>
+		<p>Welcome to the Employee Petition Manager Application!</p>
+		<div class="alert alert-warning" role="alert">
+	    <div class = "container">
+	    <p><h5>Index Page - User Login</h5></p>
+		<strong><p th:text="'You are currently logged in as, ' + ${name}"></p></strong>
+		<p>
+			<a href="#" th:href="@{/home}" class="btn btn-outline-dark">Back to profile</a>
+			<a href="#" th:href="@{/logout}" class="btn btn-outline-dark">Logout</a>
+		</p>
+		</div>
+	</div>
+	</div>
+	
+	<div th:replace="fragments/footer :: footer"></div>
+	</div>
+	
+	
+</body>
+</html>
